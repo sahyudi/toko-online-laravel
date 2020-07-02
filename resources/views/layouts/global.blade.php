@@ -67,7 +67,14 @@
             <div class="polished-sidebar bg-light col-12 col-md-3 col-lg-2 p-0 collapse d-md-inline" id="sidebar-nav">
                 <ul class="polished-sidebar-menu ml-0 pt-4 p-0 d-md-block">
                     <input class="border-dark form-control d-block d-md-none mb4" type="text" placeholder="Search" aria-label="Search" />
-                    <li><a href="/home"><span class="oi oi-home"></span> Home</a>
+                    <li>
+                        <a href="/home"><span class="oi oi-home"></span> Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('users.index')}}">
+                            <span class="oi oi-people"></span> Manage Users
+                        </a>
                     </li>
 
                     <div class="d-block d-md-none">
