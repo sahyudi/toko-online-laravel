@@ -76,6 +76,11 @@
                             <span class="oi oi-people"></span> Manage Users
                         </a>
                     </li>
+                    <li>
+                        <a href="{{route('categories.index')}}">
+                            <span class="oi oi-tag"></span> Manage categories
+                        </a>
+                    </li>
 
                     <div class="d-block d-md-none">
                         <div class="dropdown-divider"></div>
@@ -97,7 +102,7 @@
                 <div class="row ">
                     <div class="col-md-12 pl-3 pt-2">
                         <div class="pl-3">
-                            <h3>@yield("pageTitle")</h3>
+                            <h3>@yield("title")</h3>
                             <br />
                         </div>
                     </div>
