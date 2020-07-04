@@ -5,12 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+
+class Book extends Model
 {
     use SoftDeletes;
-
-    public function books()
+    
+    public function categories()
     {
-        return $this->belongsToMany('App\Book');
+        return $this->belongsToMany('App\Category');
     }
 }
