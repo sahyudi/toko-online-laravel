@@ -5,7 +5,7 @@ Edit Category
 @endsection
 
 @section('content')
-<div class="col-md-8">
+<label class="col-md-8">
     @if(session('status'))
     <div class="alert alert-success">
         {{session('status')}}
@@ -18,19 +18,31 @@ Edit Category
 
         <div class="form-group">
             <label>Category name</label> <br>
-            <input type="text" class="form-control" value="{{$category->name}}" name="name">
+            <input type="text" class="form-control {{$errors->first('name') ? "is-invalid" : ""}}" value="{{old('name') ? old('name') : $category->name}}" name="name">
+            <div class="invalid-feedback">
+                {{$errors->first('name')}}
+            </div>
         </div>
 
-        <div class="form-group">
+        <label class="form-group">
             <label>Cateogry slug</label>
-            <input type="text" class="form-control" value="{{$category->slug}}" name="slug">
-        </div>
+            <input type="text" class="form-control {{$errors->first('slug') ? "is-invalid" : ""}}" value="{{old('slug') ? old('slug') : $category->slug}}" name="slug">
+            <div class="invalid-feedback">
+                {{$errors->first('slug')}}
+            </div>
+        </label>
 
         <div class="form-group">
             @if($category->image)
             <span>Current image</span><br>
             <img src="{{asset('storage/'. $category->image)}}" width="120px">
+            <br><br>
             @endif
+            <input type="file" class="form-control {{$errors->first('image') ? "is-invalid" : ""}}" name="image">
+            <small class="text-muted">Kosongkan jika tidak ingin mengubah gambar</small>
+            <div class="invalid-feedback">
+                {{$errors->first('image')}}
+            </div>
         </div>
 
         <div class="form-group">
@@ -41,5 +53,5 @@ Edit Category
             <input type="submit" class="btn btn-primary" value="Update">
         </div>
     </form>
-</div>
+</label>
 @endsection

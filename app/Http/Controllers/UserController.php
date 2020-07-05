@@ -4,8 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Validation\Rule;
+
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        // OTORISASI GATE
+        $this->middleware(function ($request, $next) {
+
+            if (Gate::allows('manage-users')) return $next($request);
+
+            abort(403, 'Anda tidak memiliki cukup hak akses');
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -56,6 +69,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validation = \Validator::make($request->all(), [
+            "name" => "required|min:5|max:100",
+            "username" => "required|min:5|max:20",
+            "roles" => "required",
+            "phone" => "required|digits_between:10,12",
+            "address" => "required|min:20|max:200",
+            "avatar" => "required",
+            "email" => "required|email",
+            "password" => "required",
+            "password_confirmation" => "required|same:password"
+        ])->validate();
+
         $new_user = new \App\User;
 
         $new_user->name = $request->get('name');
@@ -112,7 +138,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        \Validator::make($request->all(), [
+            "name" => "required|min:5|max:100",
+            "roles" => "required",
+            "phone" => "required|digits_between:10,12",
+            "address" => "required|min:20|max:200",
+        ])->validate();
+
+
         $user = \App\User::findOrFail($id);
         $user->name = $request->get('name');
         $user->roles = json_encode($request->get('roles'));
